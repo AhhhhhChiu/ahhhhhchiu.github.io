@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-  import Squares from "./components/Squares.vue";
+  import Squares from "./components/squares.vue";
 </script>
 <style>
 * {

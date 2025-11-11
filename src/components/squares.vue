@@ -112,12 +112,19 @@ const lettersAndSymbols = [
   '9'
 ];
 
-const getRandomChar = () => {
-  return lettersAndSymbols[Math.floor(Math.random() * lettersAndSymbols.length)];
+const getRandomChar = (): string => {
+  const randomIndex = Math.floor(Math.random() * lettersAndSymbols.length);
+  return lettersAndSymbols[randomIndex] ?? 'A';
 };
 
-const getRandomColor = () => {
-  return props.glitchColors[Math.floor(Math.random() * props.glitchColors.length)];
+const getRandomColor = (): string => {
+  const randomIndex = Math.floor(Math.random() * props.glitchColors!.length);
+  const candidate = props.glitchColors![randomIndex];
+  if (candidate !== undefined) {
+    return candidate;
+  }
+  const first = props.glitchColors![0];
+  return first !== undefined ? first : '#61dca3';
 };
 
 const hexToRgb = (hex: string) => {
@@ -129,9 +136,9 @@ const hexToRgb = (hex: string) => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
+        r: parseInt(result[1]!, 16),
+        g: parseInt(result[2]!, 16),
+        b: parseInt(result[3]!, 16)
       }
     : null;
 };
